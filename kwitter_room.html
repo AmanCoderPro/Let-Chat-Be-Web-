@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Kwitter Room</title>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
+
+<link href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap" rel="stylesheet"><meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="kwitter_room.css">
+
+</head>
+<body>
+<div class="container">
+<button id="logout" class="glyphicon glyphicon-log-out btn btn-danger">Logout</button>
+	<center>
+		<h1 class="header">	
+			Kwitter	
+			<sup>
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ0AAAC7CAMAAABIKDvmAAAAgVBMVEX///8AAAAiIiKysrLS0tLHx8c1NTX7+/v8/Pzy8vL4+Pjz8/Po6Ojr6+sZGRnMzMzY2Nji4uIpKSmOjo55eXlbW1sRERGrq6tAQEBNTU1SUlJmZma+vr5wcHA7Ozve3t6IiIiYmJgVFRVXV1eWlpajo6MuLi51dXWKioqAgIBpaWm2YOCuAAAMbklEQVR4nO2d13riMBCFham2qSYYkhBaKCHv/4ALOmNCcVF1gT03+y0hxPyWpdE0sUbtvy5i/2lc6T+Na11oBIHzugrCOxqT+gvrrX9HozVlL6vm9/2TUnPGbtFXVZDqi5t5o88HSvjWLfq6CtE0uJ1FF+tP/p/PYdFXlr86az4UZr9BRKM1cN84jlmz6IvLW+6Kf/GPRt250Giy9pYj2te9oq8vV40OeCiW7IbG6fHZn1/v715pLh3+chjnCfOOBpu/8x/9vM5cOpjw1WN1HgD3NNgAc+nXsthrzE24/c6WTw4PNNjwjVuok0GR15ibYGa0ppgpH2mw7pjPpe/zTnEXmZM6O25mzOa0bMTQYC7es5g++9LibR1+35vRfY+jwdr1AA+TX8xV5iT3uDl/ze/G5ZVYGow1Wlh1evlfY27qfsHMGP29lECD9T6wxX9eM304wQ2/Nq2SaDD3wJeW2eA559LOgN/u8OdmbkykwfwtnzyCejvPq8xJ7fmMz4zr25eTaTBvyn8jfEIz3Zu2sGreDfwUGsybYzSNn81M99ZOvEWVRuP0cH3CA/Rcc6k7hrXdfJgSU2kwtsQq9FRmevcYJnm1MmhEjpD3ue1rzE3LLw7jaxTzsywajO1qWFqsXmJ+ijMzLsqmweZ8yqmNn2LX0sQ6OY7/qQANNoAH6FB9M92bt+DbS/i5CA02/MUkXHUPkD/lw7yV+NQL0WCjI219K22XuuswY0UQo8F6a7hFquxN7/1kWguCNE6DjD9xreqa6SNEi77SLElRGqcJiHsQnap606M4QZyZcZEwjdPn8aUljDVbSq8oTpC+LkrQYF0YLh8V3LU0YSRsM6Y9GRrMh5nuVC1QS37eWmZ2ihQN5u1gl1bLA+Tv+MoaZO+15GicKM8w5Cq0tLhbbDwFvp8kDdahhKBjZebS3pFf8Gcj+63SNBhrwOXxJfLpJdCSmxnhQWhXIU/jZKbXElxHJVSDe+/6gkNZgcbJ3q/BTC//XIrn2tkKbr9VaDBvykN2+3XJdy0dpCP0d6IRVCUapz/Dc4DCY6lxtOt8bxXWhR9pNRqn5xHG3aTEK6234yO4JvG9VGmwEZaWWWnNdPJvS12gMg3WW3G7dDEv51zaQ6KfnL9OncZpaeGTR2taxiyPEV9ZNwc5I1GDBvNgpgfr8rmPGxMlZ4wOjdNy/iFj2+SmDgLI8rdJjwYbIlD7W6q5lMbsXv4R1qQRmekfJXJ5UDrCfi5vDOnSYD3sl/eliUz6SEfYqwTStWmcbkUf5q/ar5sW+ef2SpEwfRqMIWuodiyDXdpDYvhEbZkzQYPWs/gkgHw1gl9fNbPTCI1L0kujWJdHp4HcNuXiPDM0WHdFIc4iN7WU6LdXjwcaohElli0KNNM91BPoXIIpGtG1OIV5090dNzNmOsPTGA3WhpmuPINpqodk33et3GdzNCIz/Vwtl796RxTV6P1tkzSi4sH3/PMp9cyMi4zSYD7yUpNTiSxpBPsvPtFPQmZpMLajEtJcl5YGX8/6WRH4bJmmQWZ6nrnp7XkAM0Pf1jFOgzVQ5/OW11zqT82lpJmnwYZUIZXPXOoiP+/diLPaAg3W/aESUlMfmPa3xnzOMFQWYIMG66GEtHVfDGNeI7SXMWXiWKHBfJjpge0S0uUn6glMTdl2aLAOsts3R6tmOrIUaytjWyNLNE5XiqXl1+LSAjOjZjBTwBoN5n5ZNtPn/PMDk5OTPRqsveIx8pYdDxDlkMyM9j6wSIN14HFwphZcHj001fkwu4rbpBHl1tTGxufS0apvw8KzSoOxJrzpR8Nz6RIdU4w3kLFMgw2pX5LRfMoG6gmOxneGtmmcxnRo+gFHQ4CahSZ+1mmctlV88l9MTeUAoVAmtOFCsU/j9Df46HAMWUn4tL6VmrI8aLAGCiJMeNM7a/5RCzv741xosCWedP2tpotKvQ9LBm4+NFgXnV7eNZcWyp2x1uYyJxpsgLZIemY6edXE6glUlBMNCuKfk7HU10Vq2rey54DOhwZF4fjSouxNp8jm2mKgNxca8HXsx7w8oq/oTacastDmEM6DBmIKwdRfIp9SyUzfRY2DbWa250AD5QrB2RZV7/W7DS/P2sxeDZl9GvCQRhmUyKfsSwZqfays3yvkq1hzp1mngV3Fn+1Y54HazKrlG1H1x++S4pqWLFHrNCgV6/rRoCJuCW86pW/zTuv0eZZ6n9qlQY0ZbueJxqeUq6aDhgCbH+ADzJmdqhirNNoIMt1XKS+RhyNWQtqmSr11tIEfYHRYKbi06iVGP/DHGGmXer4K7Mo7UT3B35eHs2dhA4dNGmhBEGdduGgntMj02HRQH3X7YCB1eW/hPA+LNHZwa8caS200EQsyvHneeINH7faZQgczx3yevzUaHaTTJro0GvDnfaUtLS41E38YXcBhvuzBFg1vy+/qZ3Ii/gjBhffkd3ThGo/7jCXWmfXjT7RkiQYVo6bfeRiYYZJlib1eGF/oQaT0E99uZIcGtdY6pM8KPpKU4h2+HRgW/XHCRIuO0xuzidxWaHQxMjLTN6nXbz/GZeFR4+Bd4jra5XGrjdGopg0a8F4mDPEbUalmf3U/NVClXuqpWL034zgs0BjRTRMaw+gWEh5u12E/SvRL/V30oMnq4SUj8zQwv/VFG4BQw7rJ9V93V+HDa3Hq4Yk0l05lnAYK2B1x76U7rsHcvLzSBSCBkuMefvfL1FRqmsaS7CKJIGnUjiuypZZYPIUaAvSQ5v9raHQYphHBkDIDKFG8tuL/G37LDH8aWZ9mcJilAReoI72fok4v51tMqZVb0R1qG0etTYxUnxqlgQbGKkXk1Fb7u4HGwYHEDqSNrbKRNsEGaZD1uFdyWnbhAXIceZ50XJCJ4Kw5GpTypurBpVoCATPjUfCWPG51pWWOBkxp9cIDD/2olOoJUKKiX4hgjAa+i0ijxkSBp0okroO4hHZahykadDl6vQPPZnpqF+VEtTH7zjRxGKIBf/C37r1ZHlRbALXnJsJwZmhgVv/Qn8ZcdRubcOiNcAM02vAHfxd8MAAFfHWikgZo+GioPym80Xlk/KnPXfo06HSBz8JhRDha6qmkBno6Gd1F6gl5M+o4dGmQP7gsJ5VjA7xXPa9TkwY548xXA6gK2Q2BYhW5Hg04asMynRSB0x+ctdJUqkUDTvzQfGmSjpYUaFH5XR0aCPCEFupEtDSiy1IYHRo04A8u4Vldo188v/IJHuo0bMXJDQjTmUKrPmUajfLCOOPgRpB03Em5gzeHEVjIrzEiiv/LrvyKNJB7lRomLVbUWFPSQaBGg9IUNfZH1kXHnqafOnUvJRpNZIGWtJM5yUV2kVSbTxUakT+41DDOm+u+rKdBgUaUElvixwTyd7JhOHkadSP+2FzkyeKQpdFGJOe9VA3Mk4WrFT5hTpKGRzAqczYqnPmi/ms5GvQkfhTfjllYdZnYhhQNahBQSANRZUVxL6H3StDwt3Z6gFhWfFlI/FvFafhIo5Gz7sqgqN4p+53iNKigv2yngwhIPJdCmEbvGKrsCkshyrNpZeIQpUEeA7ud7uxJMAdLkAb8wbVV6bx+oqIS5QwcgiewI4VzbPYKcxXiTk563EmIBvJZQyWnfGkEP26QmtcrQmNIydKl37Sma5mNQ4AGoO6TK0WqIkqBT8GRTYPi3qqB3jIJYbh+ckfcTBpRLe4TwIjKPzY/SV8miwbslieBcamGSbIUMmhERlzFJ9A/dSnFIh5HOg3k2Qkc5F4dRVHJ2LkjjUanzhMfFxU5XVxQHsrEDnF7jBQa3lPCOH2vn02SZyKZBsHQbWZXQnkIw8WUiiXS8IyVOZRPbbRueOywl0SjndYvovKi89QeWs8n0PCQEluuc18NyqdOKXffL56Gj27hVfMHS4jOoPm4/YaxNPwxYFTPBSouj3DcjI44Gu4PIgUV9foJqhMTQ42hgfzg2uFJtibJQtzpOr7+SIOq2I+Vd2dki8q//qaIBxrY5YWvACPah/312bungUTcfvlSYu2oeYvjjsaSXKDFnfKas6K2g8BxSwMwNA7frZ6aVODD/3NDI/IHv8zIOGvAAy2IO13RGET5wS8yZ0S6Sov+o7H4Qfc9+0fOlU0Iw527XPzRCPku18n7aNcyaBl1YfyjweVYbf9fWiHutFnzmu8LDbtnIZRYaMvlzK7HhkKf8WcRdWE8izX5P9otEqosStc50xhwc/yt/sraRp1y8KSEgfPKCvo3NP4L+k/jWv9pXOsfuji/Xbl5QX4AAAAASUVORK5CYII=">
+			</sup>
+		</h1>
+		<h3 id="user_name" class="color_red"></h3>
+		<div class="form-group input_div_room_page">
+			<label class="labelroomadd">Add a Room:</label>
+			<input type="text" id="room_name" class="form-control" placeholder="RoomName">
+		</div>
+		<button class="btn btn-info" onclick="addRoom()">Add Room</button>
+		<h3 class="color_red labelroomadd" id="rooms">ROOMS</h3>
+		<div id="output">
+		</div>
+	</center>
+</div>
+<script src="kwitter_room.js"></script>
+</body>
+</html>
